@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{99C4D619-A884-4042-A619-16D6E59C2699}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="Sistema.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Test\SistemaTests.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="Sistema">
+			<MSBuild Projects="Sistema.dproj"/>
+		</Target>
+		<Target Name="Sistema:Clean">
+			<MSBuild Targets="Clean" Projects="Sistema.dproj"/>
+		</Target>
+		<Target Name="Sistema:Make">
+			<MSBuild Targets="Make" Projects="Sistema.dproj"/>
+		</Target>
+		<Target Name="SistemaTests">
+			<MSBuild Projects="Test\SistemaTests.dproj"/>
+		</Target>
+		<Target Name="SistemaTests:Clean">
+			<MSBuild Targets="Clean" Projects="Test\SistemaTests.dproj"/>
+		</Target>
+		<Target Name="SistemaTests:Make">
+			<MSBuild Targets="Make" Projects="Test\SistemaTests.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="Sistema;SistemaTests"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="Sistema:Clean;SistemaTests:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="Sistema:Make;SistemaTests:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>
